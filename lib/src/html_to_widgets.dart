@@ -160,6 +160,8 @@ class WidgetsHTMLDecoder {
                 alreadyChecked = domNode.attributes.keys.contains("checked");
               }
             }
+
+
             result.addAll(
               await _parseSpecialElements(
                 domNode,
@@ -828,6 +830,18 @@ class WidgetsHTMLDecoder {
               .merge(customStyles.boldStyle);
         }
       }
+    }
+
+    final fontSizeStr = cssMap["font-size"];
+    if(fontSizeStr != null) {
+
+      final double? fontSize = double.tryParse(fontSizeStr);
+      if(fontSize != null) {
+
+        style = style
+            .copyWith(fontSize: fontSize);
+      }
+
     }
 
     ///apply different text decorations like undrline line through
